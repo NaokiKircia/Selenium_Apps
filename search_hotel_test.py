@@ -26,3 +26,28 @@ driver.find_element_by_id("adultInput").send_keys("4")
 driver.find_element_by_id("childInput").clear()
 driver.find_element_by_id("childInput").send_keys("4")
 driver.find_element_by_xpath("//button[text()=' Search']").click()
+#//h4[contains(@class, 'list_title')]//b
+hotels = driver.find_elements_by_xpath("//h4[contains(@class, 'list_title')]//b")
+hotel_names = [hotel.get_attribute("textContent") for hotel in hotels]
+for name in hotel_names:
+    print("Hotel name: " + name)
+prices = driver.find_elements_by_xpath("//div[contains(@class, 'price_tab')]//b")
+prices_euro = [price.get_attribute("textContent") for price in prices]
+for name in prices_euro:
+    print("Price for hotel: " + name)
+
+# prices = driver.find_elements_by_xpath("//div[contains(@class, 'fs26 text-center')]//b")
+# prices_euro = [price.get_attribute("textContent") for price in prices]
+# for name in prices_euro:
+#     print("Inny class text: " + name)
+
+assert hotel_names[0] == 'Jumeirah Beach Hotel'
+assert hotel_names[1] == 'Oasis Beach Tower'
+assert hotel_names[2] == 'Rose Rayhaan Rotana'
+assert hotel_names[3] == 'Hyatt Regency Perth'
+assert prices_euro[0] == '€20.24'
+assert prices_euro[1] == '€46'
+assert prices_euro[2] == '€73.60'
+assert prices_euro[3] == '€138'
+
+driver.close()
